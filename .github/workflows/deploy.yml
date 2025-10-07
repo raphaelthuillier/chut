@@ -1,12 +1,10 @@
-name: Deploy Chut to GitHub Pages
-
+name: Deploy to GitHub Pages
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -15,21 +13,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Install dependencies
-        working-directory: app
-        run: npm install
+        run: npm ci
 
-      - name: Install Expo CLI
-        run: npm install -g expo-cli
-
-      - name: Build web version with Expo
-        working-directory: app
-        run: npx expo build:web
+      - name: Build Expo Web
+        run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: app/web-build
+        run: |
+          npm install -g gh-pages
+          gh-pages -d dist
