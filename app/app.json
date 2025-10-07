@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Chut",
+    "slug": "chut",
+    "scheme": "chut",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": { "image": "./assets/splash.png", "resizeMode": "contain", "backgroundColor": "#F9F7F5" },
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.tonorg.chut" },
+    "android": { "package": "com.tonorg.chut", "adaptiveIcon": { "foregroundImage": "./assets/adaptive-icon.png", "backgroundColor": "#F9F7F5" } },
+    "web": { "bundler": "metro" }
+  }
+}
