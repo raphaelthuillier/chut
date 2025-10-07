@@ -3,16 +3,21 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write   # 👈 permet d’écrire sur la branche gh-pages
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: app   # ton projet est dans /app
+        working-directory: app
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false   # on gère nous-mêmes l’authentification
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -27,12 +32,14 @@ jobs:
       - name: Build Expo Web
         run: npm run build
 
-      - name: Configure Git user for gh-pages
+      - name: Configure Git user
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
 
       - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # 👈 jeton automatique fourni par GitHub
         run: |
           npm install -g gh-pages
-          gh-pages -d dist -b gh-pages -r https://github.com/${{ github.repository }}.git
+          gh-pages -d dist -b gh-pages -r https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
