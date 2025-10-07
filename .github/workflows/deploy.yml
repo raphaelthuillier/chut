@@ -21,6 +21,9 @@ jobs:
         working-directory: app
         run: npm install
 
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
+
       - name: Build web version with Expo
         working-directory: app
         run: npx expo build:web
