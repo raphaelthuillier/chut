@@ -6,6 +6,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app   # 👈 indique à GitHub d'exécuter les commandes dans /app
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -14,6 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'  # active le cache npm
 
       - name: Install dependencies
         run: npm install --force
