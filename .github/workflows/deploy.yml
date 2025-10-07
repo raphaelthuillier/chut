@@ -37,9 +37,9 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
 
-      - name: Deploy to GitHub Pages
+      -       - name: Deploy to GitHub Pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # 👈 jeton automatique fourni par GitHub
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install -g gh-pages
-          gh-pages -d dist -b gh-pages -r https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          gh-pages -d app/dist -b gh-pages -r https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
