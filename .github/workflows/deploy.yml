@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: app/app   # ✅ ton package.json est bien ici
+        working-directory: app/app   # ✅ ton package.json est ici
 
     steps:
       - name: Checkout repository
@@ -23,8 +23,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache-dependency-path: app/app/package.json
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm install --force
