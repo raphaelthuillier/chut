@@ -18,8 +18,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache-dependency-path: app/package.json  # évite l'erreur de cache lockfile manquant
-          cache: 'npm'  # toujours utile pour accélérer
+          cache-dependency-path: app/package.json
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install --force
@@ -27,7 +27,12 @@ jobs:
       - name: Build Expo Web
         run: npm run build
 
+      - name: Configure Git user for gh-pages
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+
       - name: Deploy to GitHub Pages
         run: |
           npm install -g gh-pages
-          gh-pages -d dist
+          gh-pages -d dist -b gh-pages -r https://github.com/${{ github.repository }}.git
