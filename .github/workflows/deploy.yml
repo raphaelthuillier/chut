@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: app   # 👈 indique à GitHub d'exécuter les commandes dans /app
+        working-directory: app   # ton projet est dans /app
 
     steps:
       - name: Checkout repository
@@ -18,7 +18,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'  # active le cache npm
+          cache-dependency-path: app/package.json  # évite l'erreur de cache lockfile manquant
+          cache: 'npm'  # toujours utile pour accélérer
 
       - name: Install dependencies
         run: npm install --force
