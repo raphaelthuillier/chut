@@ -1,1 +1,20 @@
+{
+  "name": "chut",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://raphaelthuillier.github.io/chut",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
+  }
+}
 
